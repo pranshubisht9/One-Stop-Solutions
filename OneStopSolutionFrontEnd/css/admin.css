@@ -89,3 +89,31 @@ section>div>span{
     height: 40px;
     outline: none;
 }
+
+/* get all dpartment  */
+
+tr>th{
+
+}
+
+table{
+text-align: center;
+border: 1px solid red;
+margin: auto;
+}
+
+table > tr,th{
+    border: 1px solid black;
+display: grid;
+grid-template-columns: auto auto;
+text-align: center;
+row-gap: 50%;
+}
+
+td,th{
+border: 1px solid black;
+}
+
+
+
+

@@ -12,10 +12,21 @@
     <!-- adding font awsome icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <script src="https://kit.fontawesome.com/32f181d7c4.js" crossorigin="anonymous"></script>
-
-    <script src="../js/admin.js"></script>
+    <link rel="stylesheet" href="../css/popup.css">
+ 
 </head>
 <body>
+
+        <!-- popup div  -->
+
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <h2 style="color: red;"><span></span></h2>
+                <a id="close" id="" href="#">&times;</a>
+                <div class="content" id="popAlert">
+                </div>
+            </div>
+        </div>
 
     <nav>
         <div id="nav">
@@ -28,13 +39,15 @@
         </div>
     </nav>
 
-    <section id="admSec">
+    <section id="adminSec">
+
+    
 
         <div>
             <span>Admin Profile</span>
           <table>
             <tbody id="profile">
-                <tr>
+                <!-- <tr>
                     <td>First Name:</td>
                     <td>Kapil</td>
                 </tr>
@@ -43,7 +56,7 @@
                     <td>Khursade</td>
                 </tr>
                 <tr>
-                    <td>Phone:</td>
+                    <td>Username:</td>
                     <td>8605514442</td>
                 </tr>
                 <tr>
@@ -51,15 +64,16 @@
                     <td>kapilkhursade@gamil.com</td>
                 </tr>
                 <tr>
-                    <td>City:</td>
+                    <td>Type:</td>
                     <td>Bhusawal</td>
-                </tr>
+                </tr> -->
             </tbody>
           </table>
         </div>
 
         <div id="getAllDepart">
-            <span onclick="openTable('getAllDepart')">Get All Department</span>
+            <span onclick="getAllDept()" style="display:block;;">Get All Department</span>
+            
             <table class="hide">
                 <thead>
                     <td>Id</td>
@@ -73,10 +87,10 @@
 
         <div id="createDepart">
             <span onclick="openAdmiForm('createDepart')">Create Department</span>
-            <form class="admiFormCss hide">
+            <form class="admiFormCss hide" id="deptForm">
                 <label>Department Name</label>
-                <input type="text" name="departmentName">
-                <input type="submit" value="Create">
+                <input type="text" name="departmentName" id="deptName">
+                <input type="submit" value="Create" id="createDept">
             </form>
         </div>
 
@@ -119,6 +133,8 @@
         </div>
 
         <div id="createOperator">
+
+
             <span onclick="openAdmiForm('createOperator')">Create Operator</span>
             <form class="admiFormCss hide">
                 <label>FirstName</label>
@@ -190,3 +206,5 @@
     
 </body>
 </html>
+<script src="../js/admin.js"></script>
+<script src="../js/popup.js"></script>

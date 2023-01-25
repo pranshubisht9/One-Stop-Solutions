@@ -21,7 +21,7 @@ navbar{
     margin-top: -8px;
     background-color: rgb(246, 244, 244);
     position: fixed;
-    z-index: 1000;
+    /* z-index: 1000; */
 }
 .navbar{
     width: 95%;
@@ -140,6 +140,7 @@ navbar{
     align-items: center;
     line-height: 5px;
 }
+
 .home>div>p{
     font-size: 20px;
     margin-top: 70px;
@@ -148,8 +149,8 @@ navbar{
 }
 .home>div>h1{
     color: rgb(249, 152, 152);
-    font-size: 55px;
     mix-blend-mode:difference;
+    font-size: 5vw;
 }
 footer{
     border-top: 1.35px solid gainsboro;
@@ -165,3 +166,15 @@ footer>div>div{
     gap: 20px;
     font-size: 25px;
 }
+
+
+/* logo  */
+#logo{
+    /* display: block; */
+    /* position:fixed ; */
+}
+
+#logo>img{
+    width: 25%;
+}
+
