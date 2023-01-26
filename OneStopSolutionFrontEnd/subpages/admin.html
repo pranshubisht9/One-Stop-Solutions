@@ -72,7 +72,7 @@
         </div>
 
         <div id="getAllDepart">
-            <span onclick="getAllDept()" style="display:block;;">Get All Department</span>
+            <span id="getAllDept">Get All Department</span>
             
             <table class="hide">
                 <thead>
@@ -86,7 +86,7 @@
         </div>
 
         <div id="createDepart">
-            <span onclick="openAdmiForm('createDepart')">Create Department</span>
+            <span>Create Department</span>
             <form class="admiFormCss hide" id="deptForm">
                 <label>Department Name</label>
                 <input type="text" name="departmentName" id="deptName">
@@ -95,31 +95,32 @@
         </div>
 
         <div id="deleteDepart">
-            <span onclick="openAdmiForm('deleteDepart')">Delete Department</span>
-            <form class="admiFormCss hide">
+            <span>Delete Department</span>
+            <form class="admiFormCss hide" id="deleteDept">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
-                <input type="submit" value="Delete">
+                <input type="number" name="departmentId" id="dId">
+                <input type="submit" value="Delete" id="deleteDept">
             </form>
         </div>
 
         <div id="updateDepart">
-            <span onclick="openAdmiForm('updateDepart')">Update Department</span>
-            <form class="admiFormCss hide">
+            <span>Update Department</span>
+            <form class="admiFormCss hide" id="updateDept">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
+                <input type="number" name="departmentId" id="updateDeptId">
                 <label>Department Name</label>
-                <input type="text" name="departmentName">
+                <input type="text" name="departmentName" id="updateDeptName">
                 <input type="submit" value="Update">
             </form>
         </div>
 
         <div id="getDepartById">
-            <span onclick="openAdmiForm('getDepartById')">Get Department By Id</span>
-            <form class="admiFormCss hide">
+            <span>Get Department By Id</span>
+            <form class="admiFormCss hide" id="getDeptById">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
-                <input type="submit" value="Get" onclick="openTable('getDepartById')">
+                <input type="number" name="departmentId" id="getDeptByIdId">
+                <input type="submit" value="Get" 
+                 >
             </form>
             <table class="hide">
                 <thead>
@@ -135,24 +136,24 @@
         <div id="createOperator">
 
 
-            <span onclick="openAdmiForm('createOperator')">Create Operator</span>
-            <form class="admiFormCss hide">
+            <span>Create Operator</span>
+            <form class="admiFormCss hide" id="createOperator">
                 <label>FirstName</label>
-                <input type="text" name="firstname">
+                <input type="text" name="firstname" id="firstName">
                 <label>LastName</label>
-                <input type="text" name="lastname">
+                <input type="text" name="lastname" id="lastName">
                 <label>Email</label>
-                <input type="email" name="email">
+                <input type="email" name="email" id="email">
                 <label>Mobile</label>
-                <input type="text" name="mobile">
+                <input type="text" name="mobile" id="mobile">
                 <label>City</label>
-                <input type="text" name="city">
+                <input type="number" name="departmentId" id="oprDeptId">
                 <label>Username</label>
-                <input type="text" name="username">
+                <input type="text" name="username" id="username">
                 <label>Password</label>
-                <input type="password" name="password">
+                <input type="password" name="password" id="password">
                 <label>Operator Type</label>
-                <select name="type">
+                <select name="type" id="type">
                     <option value="">Select Type</option>
                     <option value="">Television</option>
                     <option value="">Mobile</option>
@@ -166,11 +167,11 @@
         </div>
 
         <div id="getOperById">
-            <span onclick="openAdmiForm('getOperById')">Get Operator By Id</span>
-            <form class="admiFormCss hide">
+            <span>Get Operator By Id</span>
+            <form class="admiFormCss hide" id="getOperatorById">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
-                <input type="submit" value="Get" onclick="openTable('getOperById')">
+                <input type="number" name="departmentId" id="getOperatorByIdId">
+                <input type="submit" value="Get">
             </form>
             <table class="hide">
                 <thead>
@@ -187,7 +188,7 @@
         </div>
 
         <div id="getAllOperById">
-            <span onclick="openTable('getAllOperById')">Get All Operator</span>
+            <span id="getAllOperator" onclick="">Get All Operator</span>
             <table class="hide">
                 <thead>
                     <td>Id</td>
