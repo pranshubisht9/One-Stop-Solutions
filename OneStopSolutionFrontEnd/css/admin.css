@@ -98,12 +98,11 @@ tr>th{
 
 table{
 text-align: center;
-border: 1px solid red;
 margin: auto;
 }
 
 table > tr,th{
-    border: 1px solid black;
+    /* border: 1px solid black; */
 display: grid;
 grid-template-columns: auto auto;
 text-align: center;
@@ -111,9 +110,49 @@ row-gap: 50%;
 }
 
 td,th{
-border: 1px solid black;
+/* border: 1px solid black; */
+}
+
+#adminSec{
+    /* color: white; */
 }
 
 
 
+.overlay{
+    color: black !important;
+}
 
+#popAlert{
+    
+}
+
+.col{
+    /* display: grid; */
+    display: flex;
+    justify-content: space-around;
+    row-gap: 50px;
+}
+
+.col > td{
+    width: 100%;
+}
+
+#thead-d{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10%;
+
+    justify-content: center;
+    width: 100%;
+    /* margin: auto; */
+}
+
+#thead-d>td{
+    width: 90%;
+    text-align: center;
+}
+
+#profile>tr,td{
+    border: 1px solid white;
+}

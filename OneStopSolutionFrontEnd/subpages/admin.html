@@ -24,6 +24,7 @@
                 <h2 style="color: red;"><span></span></h2>
                 <a id="close" id="" href="#">&times;</a>
                 <div class="content" id="popAlert">
+                
                 </div>
             </div>
         </div>
@@ -31,10 +32,11 @@
     <nav>
         <div id="nav">
             <div>
-                <img src="../resources/OneStopSolution.png" alt="logo">
+                <img src="../resources/OneStopSolution.png" style="width: 100px;
+                position: fixed;" alt="logo">
             </div>
             <div id="options">
-                <li onclick="logOutAdmin()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+                <li onclick="logOutAdmin()" style="color: goldenrod;"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
             </div>
         </div>
     </nav>
@@ -47,41 +49,16 @@
             <span>Admin Profile</span>
           <table>
             <tbody id="profile">
-                <!-- <tr>
-                    <td>First Name:</td>
-                    <td>Kapil</td>
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td>Khursade</td>
-                </tr>
-                <tr>
-                    <td>Username:</td>
-                    <td>8605514442</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>kapilkhursade@gamil.com</td>
-                </tr>
-                <tr>
-                    <td>Type:</td>
-                    <td>Bhusawal</td>
-                </tr> -->
+
             </tbody>
           </table>
         </div>
 
         <div id="getAllDepart">
             <span id="getAllDept">Get All Department</span>
-            
             <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>Name</td>
+                <thead id="thead-dept">
                 </thead>
-                <tbody>
-                    
-                </tbody>
             </table>
         </div>
 
@@ -122,15 +99,6 @@
                 <input type="submit" value="Get" 
                  >
             </form>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>Name</td>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
         </div>
 
         <div id="createOperator">
@@ -173,34 +141,10 @@
                 <input type="number" name="departmentId" id="getOperatorByIdId">
                 <input type="submit" value="Get">
             </form>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Phone</td>
-                    <td>Type</td>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
         </div>
 
         <div id="getAllOperById">
             <span id="getAllOperator" onclick="">Get All Operator</span>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Phone</td>
-                    <td>Type</td>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
         </div>
 
     </section>

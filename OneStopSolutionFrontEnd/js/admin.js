@@ -5,13 +5,23 @@ function logOutAdmin(){
 
     if(sure){
         alert("Loging You Out");
-        window.location.href="index.html";
+
+//         visiblePOP();
+// popText.innerHTML=`<br>
+// <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+// <p style="display: block;">${data.message}</p>
+// <button>  </button>
+
+// <br>`
+
+        localStorage.removeItem("admin")
+        window.location.href="../index.html";
     }
 }
 
 let adminObj = JSON.parse(localStorage.getItem("admin"));
 
-console.log(adminObj);
+// console.log(adminObj);
 
 
 let tr1 = document.createElement("tr");
@@ -50,7 +60,7 @@ let aId = document.createElement("td");
 aId.innerText="Admin Id:"
 let adminId = document.createElement("td");
 adminId.innerText = adminObj.adminId;
-tr5.append(aId.adminId);
+tr5.append(aId,adminId);
 
 let tr6 = document.createElement("tr");
 let t = document.createElement("td");
@@ -59,7 +69,7 @@ let type = document.createElement("td");
 type.innerText = adminObj.type;
 tr6.append(t,type);
 
-document.getElementById("profile").append(tr1,tr2,tr3,tr3,tr4,tr5,tr6);
+document.getElementById("profile").append(tr1,tr2,tr3,tr4,tr5,tr6);
 document.getElementById("profile").style.color="white";
 
 
@@ -95,7 +105,7 @@ let url = "http://localhost:8880/admin/departments";
 fetch(url).then((res)=>{
     return (res.json());
 }).then((data)=>{
-    console.log(data);
+    // console.log(data);
     getAllDeptResponse(data)
 }).catch(function(err){
     console.log(err)
@@ -109,11 +119,18 @@ let getAllDeptResponse = (data) => {
     <br>`
 
     
-    let container = document.getElementById("popAlert");
-    
-    let table = document.createElement('table');
+    let cont = document.getElementById("popAlert");
+
+
+    let table = document.createElement("table");
+
+
+    let thead = document.createElement("thead");
+
     
     let tr1 = document.createElement("tr");
+    tr1.setAttribute("class","col")
+    tr1.setAttribute("id", "thead-d")
     
     let th1 = document.createElement('th')
     th1.innerText = "Department Id ";
@@ -122,20 +139,33 @@ let getAllDeptResponse = (data) => {
     th2.innerText = "Department Name";
     
     tr1.append(th1,th2);
+
+
+    thead.append(tr1);
+
+    table.append(thead);
     
+    let tbody = document.createElement("tbody");
+
+    tbody.innerHTML="";
+
     data.forEach(({departmentId,departmentName}, i) => {
 
-let tr2 = document.createElement("tr");
-let td1 = document.createElement("td");
-td1.innerText = departmentId;
-let td2 = document.createElement("td");
-td2.innerText=departmentName;
 
-tr2.append(td1,td2);
+let row = document.createElement("tr");
+row.setAttribute("class","col")
 
-table.append(tr1,tr2)
+let col1 = document.createElement("td");
+col1.innerText = departmentId;
+let col2 = document.createElement("td");
+col2.innerText=departmentName;
+
+row.append(col1,col2);
+
+tbody.append(row);
+table.append(tbody);
+cont.append(table)
 });
-container.append(table);
 }
 
 
@@ -151,7 +181,7 @@ e.preventDefault();
 
     let id = document.getElementById('dId').value;
 
-    console.log(id);
+    // console.log(id);
 
     let res = await fetch(`http://localhost:8880/admin/departments/${id}`, {
 
@@ -163,7 +193,7 @@ e.preventDefault();
     })
 
     let data = await res.json();
-     console.log('data:', data)
+    //  console.log('data:', data)
 
      visiblePOP();
      popText.innerHTML=`<br>
@@ -254,7 +284,7 @@ password : document.getElementById("password").value
 
 
 }
-console.log(operatorObj);
+// console.log(operatorObj);
 
    let res = await fetch("http://localhost:8880/admin/operator", {
     method: 'POST',
@@ -291,7 +321,7 @@ document.querySelector("#getOperatorById").addEventListener("submit",async(e)=>{
     })
 
     let data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     visiblePOP();
     popText.innerHTML=`<br>
@@ -374,7 +404,7 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
     fetch(url).then((res)=>{
         return (res.json());
     }).then((data)=>{
-        console.log(data);
+        // console.log(data);
         getAllOperatorResponse(data)
     }).catch(function(err){
         console.log(err)
@@ -390,8 +420,14 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
         let container = document.getElementById("popAlert");
         
         let table = document.createElement('table');
+
+            let thead = document.createElement("thead");
+
+
         
         let tr1 = document.createElement("tr");
+        tr1.setAttribute("class","col")
+         tr1.setAttribute("id", "thead-o")
 
         let th1 = document.createElement('th')
         th1.innerText = "Operator Id";
@@ -412,10 +448,22 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
         
         
         tr1.append(th1,th2,th3,th4,th5,th6);
+
+
+        thead.append(tr1);
+
+        table.append(thead);
+
+
+            let tbody = document.createElement("tbody");
+
+             tbody.innerHTML="";
         
         data.forEach(({operatorId,operatorFirstName,operatorLastName, login:{username},operatorType,operatorEmail}, i) => {
     
     let tr2 = document.createElement("tr");
+    tr2.setAttribute("class","col")
+
     let td1 = document.createElement("td");
     td1.innerText = operatorId;
 
@@ -436,7 +484,10 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
     td6.innerText=operatorEmail;
     
     tr2.append(td1,td2,td3,td4,td5,td6);
-    table.append(tr1,tr2,tr3,tr4,tr5,tr6)
+
+    tbody.append(tr2);
+
+    table.append(tbody);
     
     container.append(table);
 });
