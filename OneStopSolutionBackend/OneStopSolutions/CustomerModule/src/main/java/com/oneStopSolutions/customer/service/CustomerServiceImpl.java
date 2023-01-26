@@ -47,11 +47,24 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setMobile(dto.getMobile());
 
 		// Extracting login details
+//		customer.setLogin(new Login());
+//		customer.getLogin().setUsername(dto.getUsername());
+//		customer.getLogin().setPassword(dto.getPassword());
+//		customer.getLogin().setType(UserType.CUSTOMER);
+//		customer.getLogin().setActive(true);
+
+
 		customer.setLogin(new Login());
+
 		customer.getLogin().setUsername(dto.getUsername());
 		customer.getLogin().setPassword(dto.getPassword());
-		customer.getLogin().setType(UserType.CUSTOMER);
 		customer.getLogin().setActive(true);
+		customer.getLogin().setType(UserType.CUSTOMER);
+
+//		login.setUsername(dto.getUsername());
+//		login.setPassword(dto.getPassword());
+//		login.setActive(true);
+//		login.setType(UserType.ADMIN);
 
 		customerRepository.save(customer);
 
