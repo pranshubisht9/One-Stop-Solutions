@@ -75,7 +75,7 @@ public class OperatorController {
 	}
 	
 	//To get Customer By FirstName
-	@GetMapping("/customer/fn/{firstName}")
+	@GetMapping("/customer/{firstName}")
 	public ResponseEntity<List<Customer>> getCustomerByFirstNameHandler(@PathVariable("firstName") String firstName){
 		List<Customer> customers=operatorService.getCustomerByFirstName(firstName);
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);

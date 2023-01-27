@@ -178,3 +178,7 @@ footer>div>div{
     width: 25%;
 }
 
+#logo_fix{
+    position: fixed;
+    width: 100px;
+}

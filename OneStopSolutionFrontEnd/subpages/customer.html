@@ -12,15 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <script src="https://kit.fontawesome.com/32f181d7c4.js" crossorigin="anonymous"></script>
 
-    <script src="../js/customer.js"></script>
-
 </head>
 <body>
     
     <nav>
         <div id="nav">
             <div>
-                <img src="../resources/OneStopSolution.png" alt="logo">
+                <img src="../resources/OneStopSolution.png" id="logo_fix" alt="logo">
             </div>
             <div id="options">
                 <li onclick="logOutCustomer()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
@@ -33,78 +31,12 @@
             <span>Customer Profile</span>
           <table>
             <tbody id="profile">
-                <tr>
-                    <td>First Name:</td>
-                    <td>Kapil</td>
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td>Khursade</td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td>8605514442</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>kapilkhursade@gamil.com</td>
-                </tr>
-                <tr>
-                    <td>City:</td>
-                    <td>Bhusawal</td>
-                </tr>
             </tbody>
           </table>
         </div>
 
         <div id="issues">
-            <span onclick="openTable('issues'); viewCustomerIssue()">View Issues</span>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>Issue</td>
-                    <td>Type</td>
-                    <td>Status</td>
-                </thead>
-                <tbody id="issueTbody">
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                </tbody>
-            </table>
+            <span onclick="viewCustomerIssue()">View Issues</span>
         </div>
 
         <div id="createIssue">
@@ -181,3 +113,5 @@
 
 </body>
 </html>
+<script src="../js/customer.js"></script>
+<script src="../js/popup.js"></script>

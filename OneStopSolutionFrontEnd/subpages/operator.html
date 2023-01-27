@@ -12,15 +12,28 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/operator.css">
     <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/popup.css">
 
-    <script src="../js/operator.js"></script>
+
 </head>
 <body>
+
+            <!-- popup div  -->
+
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <h2 style="color: red;"><span></span></h2>
+                    <a id="close" id="" href="#">&times;</a>
+                    <div class="content" id="popAlert">
+                    
+                    </div>
+                </div>
+            </div>
 
     <nav>
         <div id="nav">
             <div>
-                <img src="../resources/OneStopSolution.png" alt="logo">
+                <img src="../resources/OneStopSolution.png" id="logo_fix" alt="logo">
             </div>
             <div id="options">
                 <li onclick="logOutOper()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
@@ -33,76 +46,34 @@
             <span>Operator Profile</span>
           <table>
             <tbody id="profile">
-                <tr>
-                    <td>First Name:</td>
-                    <td>Kapil</td>
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td>Khursade</td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td>8605514442</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>kapilkhursade@gamil.com</td>
-                </tr>
-                <tr>
-                    <td>City:</td>
-                    <td>Bhusawal</td>
-                </tr>
             </tbody>
           </table>
         </div>
 
         <div id="issueByCustId">
-            <span onclick="openOpeForm('issueByCustId')">Get Issue By Customer Id</span>
-            <form class="operFormCss hide">
+            <span>Get Issue By Customer Id</span>
+            <form id="issueByCustId" class="operFormCss hide">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Issue" onclick="openTable('issueByCustId')">
+                <input type="number" name="customerId" placeholder="Enter Customer Id" id="cxId">
+                <input type="submit" value="Get Issue">
             </form>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>Issue</td>
-                    <td>Type</td>
-                    <td>Status</td>
-                </thead>
-                <tbody>
-                   
-                </tbody>
-            </table>
         </div>
 
         <div id="issueByType">
-            <span onclick="openOpeForm('issueByType')">Get Issues By Type</span>
-            <form class="operFormCss hide">
+            <span>Get Issues By Type</span>
+            <form class="operFormCss hide" id="issueByType">
                 <label>Select Issue Type</label>
-                <select name="type">
+                <select name="type" id="type">
                     <option value="">Select Type</option>
-                    <option value="">Television</option>
-                    <option value="">Mobile</option>
-                    <option value="">Laptop</option>
-                    <option value="">Watch</option>
-                    <option value="">Airpods</option>
-                    <option value="">I Pad</option>
+                    <option value="Television">Television</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Watch">Watch</option>
+                    <option value="Airpods">Airpods</option>
+                    <option value="I Pad">I Pad</option>
                 </select>
-                <input type="submit" value="Get Issue" onclick="openTable('issueByType')">
+                <input type="submit" value="Get Issue">
             </form>
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>Issue</td>
-                    <td>Type</td>
-                    <td>Status</td>
-                </thead>
-                <tbody>
-                   
-                </tbody>
-            </table>
         </div>
 
         <div id="closeByIssueId">
@@ -115,11 +86,11 @@
         </div>
        
         <div id="getCustById">
-            <span onclick="openOpeForm('getCustById')">Get Customer By Id</span>
-            <form class="operFormCss hide">
+            <span>Get Customer By Id</span>
+            <form id="getCustomerById" class="operFormCss hide">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Customer" onclick="openTable('getCustById')">
+                <input type="number" name="customerId" placeholder="Enter Customer Id" id="cId">
+                <input type="submit" value="Get Customer">
             </form>
 
             <table class="hide">
@@ -136,24 +107,12 @@
         </div>
 
         <div id="getCustByFirstname">
-            <span onclick="openOpeForm('getCustByFirstname')">Get Customer By FirstName</span>
-            <form class="operFormCss hide">
+            <span>Get Customer By FirstName</span>
+            <form id="getCustomerByFirstname" class="operFormCss hide">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer FirstName">
-                <input type="submit" value="Get Customer" onclick="openTable('getCustByFirstname')">
+                <input type="text" name="customerId" placeholder="Enter Customer FirstName" id="fname">
+                <input type="submit" value="Get Customer">
             </form>
-
-            <table class="hide">
-                <thead>
-                    <td>Id</td>
-                    <td>First Name</td>
-                    <td>Phone</td>
-                    <td>Email</td>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
         </div>
 
         <div id="getCustByEmail">
@@ -214,7 +173,7 @@
             <form class="operFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId">
-                <input type="submit" value="Get Solution" onclick="openTable('getSolutionByIssueId')">
+                <input type="submit" value="Get Solution">
             </form>
 
             <table class="hide">
@@ -241,3 +200,5 @@
     
 </body>
 </html>
+<script src="../js/operator.js"></script>
+<script src="../js/popup.js"></script>

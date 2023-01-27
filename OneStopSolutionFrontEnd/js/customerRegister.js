@@ -11,7 +11,7 @@ document.querySelector("#registerCustomer").addEventListener("submit", async (ev
          mobile : document.getElementById("mobile").value
      }
  
-     console.log(registerData)
+    //  console.log(registerData)
  
          let res = await fetch("http://localhost:8880/customer/register", {
              method: 'POST',

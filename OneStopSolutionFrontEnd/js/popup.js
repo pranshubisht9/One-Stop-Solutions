@@ -7,7 +7,7 @@ function visiblePOP(){
 }
 
 // close popUp
-close_popUp = document.getElementById("close");
+let close_popUp = document.getElementById("close");
 close_popUp.addEventListener("click", backPage)
 function backPage(){
     // window.history.go(-1);

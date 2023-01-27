@@ -7,7 +7,7 @@ document.querySelector("form").addEventListener("submit", async (ev)=> {
  
      console.log(loginData)
  
-         let res = await fetch("http://localhost:8880/customer/login", {
+         let res = await fetch("http://localhost:8880/operator/operatorLogin", {
              method: 'POST',
              body: JSON.stringify(loginData),
              headers: {
@@ -21,7 +21,7 @@ document.querySelector("form").addEventListener("submit", async (ev)=> {
      })
  
      let fetchData = (data) => {
-         if(data.customerId == undefined){
+         if(data.operatorId == undefined){
              // alert("wrong credential...")
              visiblePOP();
              popText.innerHTML=`<br>
@@ -30,29 +30,19 @@ document.querySelector("form").addEventListener("submit", async (ev)=> {
              <br>`
          }
          else{
-             window.location.href="../subpages/customer.html";
+             window.location.href="../subpages/operator.html";
              
          }
-         let customerId = data.customerId;
-         let firstName = data.firstName;
-         let lastName = data.lastName;
+         let operatorId = data.operatorId;
+         let firstName = data.operatorFirstName;
+         let lastName = data.operatorLastName;
          let username = data.login.username;
-         let email = data.email;
-         let city = data.city;
-         let mobile = data.mobile;
+         let email = data.operatorEmail;
+         let mobile = data.operatorMobile;
  
-         let customerObj = {customerId,firstName,lastName,username,email,city,mobile}
+         let operatorObj = {operatorId,firstName,lastName,username,email,mobile}
  
-         console.log(customerObj);
+        //  console.log(operatorObj);
  
-         localStorage.setItem("customer",JSON.stringify(customerObj));
+         localStorage.setItem("operator",JSON.stringify(operatorObj));
      }
- 
- 
- 
- 
-     // visiblePOP();
-     // popText.innerHTML=`<br>
-     // <p style="display: block;">Register Successfully</p>
-     // <br>
-     // <button onclick="goToLogin()" id="goToLogin">Go to Login</button>`
