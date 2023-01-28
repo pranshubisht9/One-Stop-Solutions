@@ -61,7 +61,7 @@ public class OperatorController {
 	}
 	
 	//To close Issue By Id
-	@PatchMapping("issue/{issueId}")
+	@GetMapping("issues/{issueId}")
 	public ResponseEntity<Output> closeIssueByIdHandler(@PathVariable("issueId") Integer issueId){
 		Output output = operatorService.closeIssueById(issueId);
 		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
@@ -82,7 +82,7 @@ public class OperatorController {
 	}
 	
 	//To get Customer By Email
-	@GetMapping("customer/e/{email}")
+	@GetMapping("customers/{email}")
 	public ResponseEntity<Customer> getCustomerByEmailHandler(@PathVariable("email") String email){
 		Customer customer=operatorService.getCustomerByEmail(email);
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);

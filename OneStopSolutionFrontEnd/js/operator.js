@@ -6,6 +6,8 @@ function logOutOper(){
 
     if(sure){
         alert("Loging You Out");
+        localStorage.removeItem("operator")
+
         window.location.href="index.html";
     }
 }
@@ -169,6 +171,44 @@ document.querySelector("#issueByType").addEventListener("submit",async(e)=>{
 
 // //////////////////////////////////////Close Issue by cx id
 
+document.querySelector("#closeIssueById").addEventListener("submit",async(e)=>{
+
+    e.preventDefault();
+
+    let closeId = document.getElementById("cId").value;
+
+    let res = await fetch(`http://localhost:8880/operator/issues/${closeId}`, {
+        method: 'Get',
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
+
+    let data = await res.json();
+
+    console.log(data);
+
+    if(data.customerId == undefined){
+        // alert("wrong credential...")
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <p style="display: block;">${data.message}</p>
+        <br>`
+    }
+    else{
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3> ${data.message} </h3></p>
+
+
+        <br>`
+        
+    }
+})
+
 
 // document.querySelector("#deleteDepart").addEventListener("submit",async(e)=>{
 
@@ -269,22 +309,6 @@ document.querySelector("#getCustomerByFirstname").addEventListener("submit",asyn
         fres(data)
 
     })
-    // visiblePOP();
-    // popText.innerHTML=`<br>
-    // <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-
-    // <p style="display: block;">${data.firstName} ${data.lastName}</p>
-    // <p style="display: block;">Email: ${data.email}</p>
-    // <p style="display: block;">Customer Id: ${data.customerId}</p>
-    // <p style="display: block;">Mobile Number: ${data.mobile}</p>
-    // <p style="display: block;">Username:  ${data.login.username}</p>
-    // <p style="display: block;">City:  ${data.city}</p>
-    // <p style="display: block;">No of issues:  ${data.issues.length}</p>
-
-    // <br>`
-
-
-
 
 function fres(arrRes){
     if(arrRes.length == 0){
@@ -299,7 +323,7 @@ function fres(arrRes){
 
     visiblePOP();
     popText.innerHTML=`<br>
-    <h2 style="display: block;">${data.login.type}</u></h2>
+    <h2 style="display: block;">${arrRes[0].login.type}</u></h2>
     <br>`
     
     
@@ -325,71 +349,182 @@ function fres(arrRes){
 
 // ////////////////////////Get Customer By Email
 
-// document.querySelector("#getDeptById").addEventListener("submit",async(e)=>{
+document.querySelector("#getCustomerByEmail").addEventListener("submit",async(e)=>{
 
-//     e.preventDefault();
+    e.preventDefault();
 
-//     let id = document.getElementById("getDeptByIdId").value;
+    let email = document.getElementById("em").value;
 
+    let res = await fetch(`http://localhost:8880/operator/customers/${email}`, {
+        method: 'Get',
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
 
+    let data = await res.json();
 
-//     let res = await fetch(`http://localhost:8880/operator/departments/${id}`, {
-//         method: 'Get',
-//         headers: {
-//             'Content-Type': "application/json",
-//         }
-//     })
+    console.log(data);
 
-//     let data = await res.json();
+    if(data.customerId == undefined){
+        // alert("wrong credential...")
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <p style="display: block;">Wrong Password</p>
+        <br>`
+    }
+    else{
 
-//     visiblePOP();
-//     popText.innerHTML=`<br>
-//     <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-//     <p style="display: block;"><h3>Department Id : </h3><i>${data.departmentId}</i></p>
-//     <p style="display: block;"><h3>Department Name : </h3><i>${data.departmentName}</i></p>
-    
-//     <br>`
-// })
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3> ${data.login.type} </h3></p>
+        <p style="display: block;">${data.firstName} ${data.lastName}</p>
+        <p style="display: block;">Email: ${data.email}</p>
+        <p style="display: block;">Customer Id: ${data.customerId}</p>
+        <p style="display: block;">Mobile Number: ${data.mobile}</p>
+        <p style="display: block;">Username:  ${data.login.username}</p>
+        <p style="display: block;">City:  ${data.city}</p>
+        <p style="display: block;">No of issues:  ${data.issues.length}</p>
+
+        <br>`
+        
+    }
+})
 
 
 // //////////////////////lock Customer
 
 // /////////////////////////Create Solution   Issue Id , Solution Description
 
+document.querySelector("#createSolution").addEventListener("submit",async(e)=>{
+    e.preventDefault();
+
+
+    let operatorId = operatorObj.operatorId;
+    console.log(operatorId);
+
+    let issueId = document.getElementById("issueId").value;
+
+
+   let issueObj = {
+    solutionDescription: document.getElementById("desc").value,
+    solutionDate: new Date().toJSON().slice(0, 10)
+}
+console.log(issueObj);
+
+   let res = await fetch(`http://localhost:8880/operator/solution/${issueId}/${operatorId}`, {
+    method: 'POST',
+    body: JSON.stringify(issueObj),
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+let data = await res.json();  
+visiblePOP();
+popText.innerHTML=`<br>
+<img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+<p style="display: block;">${data.message}</p>
+
+<br>`
+})
+
+
+// 
+
+
+
 
 // /////////////////Get Solutions Of IssueId
 
+document.querySelector("#getSolutionByIssueId").addEventListener("submit",async(e)=>{
+
+    e.preventDefault();
+
+    let issueId = document.getElementById("getIssueId").value;
+
+    let res = await fetch(`http://localhost:8880/operator/solutions/${issueId}`, {
+        method: 'Get',
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
+
+    let data = await res.json();
+
+    console.log(data);
+    freSol(data)
+
+    })
+
+    function freSol(arrRes){
+        if(arrRes.length == 0){
+            // alert("wrong credential...")
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+            <p style="display: block;">Wrong Password</p>
+            <br>`
+        }
+        else{
+    
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <h2 style="display: block;">All Solutions</u></h2>
+        <br>`
+        
+        
+        let cont = document.getElementById("popAlert");
+        
+        arrRes.forEach(data => {
+        
+        
+            let p = document.createElement("p");
+            p.innerText = ` Solution Id: ${data.solutionId},  Solution Date: ${new Date(parseInt(data.solutionDate))}, Solution Desc: ${data.solutionDescription}`;
+            let br = document.createElement("br");
+    
+            
+            
+            cont.append(p,br);
+                
+                
+            })
+    }
+    }
+
+
 // ////////////////////////////Delete Solution By Id
 
+document.querySelector("#deleteSolnById").addEventListener("submit",async(e)=>{
 
-
-// document.querySelector("#deleteDepart").addEventListener("submit",async(e)=>{
-
-//     e.preventDefault();
+    e.preventDefault();
     
-//         let id = document.getElementById('dId').value;
+        let solutionId = document.getElementById('solnId').value;
     
-//         // console.log(id);
+        // console.log(id);
     
-//         let res = await fetch(`http://localhost:8880/operator/departments/${id}`, {
+        let res = await fetch(`http://localhost:8880/operator/solution/${solutionId}`, {
     
-//             method: 'DELETE',
+            method: 'DELETE',
     
-//             headers: {
-//                 'Content-Type': "application/json",
-//             }
-//         })
+            headers: {
+                'Content-Type': "application/json",
+            }
+        })
     
-//         let data = await res.json();
-//         //  console.log('data:', data)
+        let data = await res.json();
+        //  console.log('data:', data)
     
-//          visiblePOP();
-//          popText.innerHTML=`<br>
-//          <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-//          <p style="display: block;">${data.message}</p>
+         visiblePOP();
+         popText.innerHTML=`<br>
+         <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+         <p style="display: block;">${data.message}</p>
          
-//          <br>`
+         <br>`
     
-//     })
+    })
+
 
 
