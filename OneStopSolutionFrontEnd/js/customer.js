@@ -43,13 +43,10 @@ function deleteCustomer(){
                  <br>`
 
     }
-
-    setTimeout(() => {
         
         localStorage.removeItem("customer");
         window.location.href="../index.html";
         deleteCx();
-    }, 4000);
 
 }
 

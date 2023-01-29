@@ -38,9 +38,10 @@ document.querySelector("form").addEventListener("submit", async (ev)=> {
          let lastName = data.operatorLastName;
          let username = data.login.username;
          let email = data.operatorEmail;
+         let operatorType = data.operatorType;
          let mobile = data.operatorMobile;
  
-         let operatorObj = {operatorId,firstName,lastName,username,email,mobile}
+         let operatorObj = {operatorId,firstName,lastName,username,email,operatorType,mobile}
  
         //  console.log(operatorObj);
  

@@ -45,6 +45,8 @@ public class Operator {
 	private String operatorLastName;
 	private String operatorEmail;
 	private String operatorMobile;
+
+
 	private String operatorType;
 	
 	@OneToOne(cascade = CascadeType.ALL)

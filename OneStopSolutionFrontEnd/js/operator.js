@@ -13,9 +13,6 @@ function logOutOper(){
 }
 
 
-
-
-
 // fetch
 
 /////////////////////////////////////////////
@@ -59,16 +56,16 @@ tr4.append(e,email);
 
 let tr5 = document.createElement("tr");
 let aId = document.createElement("td");
-aId.innerText="Admin Id:"
+aId.innerText="Operator Id:"
 let adminId = document.createElement("td");
 adminId.innerText = operatorObj.operatorId;
 tr5.append(aId,adminId);
 
 let tr6 = document.createElement("tr");
 let t = document.createElement("td");
-t.innerText="Type:"
+t.innerText="Operator Type:"
 let type = document.createElement("td");
-type.innerText = "Operator";
+type.innerText = operatorObj.operatorType;
 tr6.append(t,type);
 
 document.getElementById("profile").append(tr1,tr2,tr3,tr4,tr5,tr6);

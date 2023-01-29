@@ -273,7 +273,7 @@ document.querySelector("#getDeptById").addEventListener("submit",async(e)=>{
 document.querySelector("#createOperator").addEventListener("submit",async(e)=>{
     e.preventDefault();
 
-   let operatorObj = {operatorFirstname : document.getElementById("firstName").value,
+   let operatorObj = {operatorFirstName : document.getElementById("firstName").value,
 operatorLastName: document.getElementById("lastName").value,
 operatorEmail: document.getElementById("email").value,
 operatorMobile: document.getElementById("mobile").value,
@@ -321,14 +321,14 @@ document.querySelector("#getOperatorById").addEventListener("submit",async(e)=>{
     })
 
     let data = await res.json();
-    // console.log(data);
+    console.log(data);
 
     visiblePOP();
     popText.innerHTML=`<br>
     <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
     <p style="display: block;"><h3> ${data.login.type} </h3></p>
     <p style="display: block;">${data.operatorFirstName} ${data.operatorLastName}</p>
-    <p style="display: block;">Email: ${data.email}</p>
+    <p style="display: block;">Email: ${data.operatorEmail}</p>
     <p style="display: block;">Mobile Number: ${data.operatorMobile}</p>
     <p style="display: block;">Operator Id: ${data.operatorId}</p>
     <p style="display: block;">Operator Type:  ${data.operatorType}</p>
@@ -394,8 +394,6 @@ document.querySelector("#getOperatorById").addEventListener("submit",async(e)=>{
 //     //  console.log('data:', data)
 
 // }
-
-
 // get all operator
 
 document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
@@ -415,44 +413,9 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
         popText.innerHTML=`<br>
         <h2 style="display: block;"><u> All Operators </u></h2>
         <br>`
-    
-        
-        let container = document.getElementById("popAlert");
-        
-        let table = document.createElement('table');
-
-            let thead = document.createElement("thead");
 
 
-        
-        let tr1 = document.createElement("tr");
-        tr1.setAttribute("class","col")
-         tr1.setAttribute("id", "thead-o")
-
-        let th1 = document.createElement('th')
-        th1.innerText = "Operator Id";
-        
-        let th2 = document.createElement('th')
-        th2.innerText = "First Name ";
-        
-        let th3 = document.createElement('th')
-        th3.innerText = "Last Name";
-
-        let th4 = document.createElement('th')
-        th4.innerText = "Username";
-        let th5 = document.createElement('th')
-        th5.innerText = "Operaor Type";
-
-        let th6 = document.createElement('th')
-        th6.innerText = "Email";
-        
-        
-        tr1.append(th1,th2,th3,th4,th5,th6);
-
-
-        thead.append(tr1);
-
-        table.append(thead);
+        let cont = document.getElementById("popAlert");
 
 
             let tbody = document.createElement("tbody");
@@ -460,36 +423,14 @@ document.querySelector("#getAllOperator").addEventListener("click",async(e)=>{
              tbody.innerHTML="";
         
         data.forEach(({operatorId,operatorFirstName,operatorLastName, login:{username},operatorType,operatorEmail}, i) => {
+
+            let p = document.createElement("p");
+            p.innerText = `Operator Id: ${operatorId},  Name: ${operatorFirstName} ${operatorLastName},  Username: ${username},  Email: ${operatorEmail}`;
+            let br = document.createElement("br");
     
-    let tr2 = document.createElement("tr");
-    tr2.setAttribute("class","col")
-
-    let td1 = document.createElement("td");
-    td1.innerText = operatorId;
-
-    let td2 = document.createElement("td");
-    td2.innerText=operatorFirstName;
-
-
-    let td3 = document.createElement("td");
-    td3.innerText=operatorLastName;
-
-    let td4 = document.createElement("td");
-    td4.innerText=username;
-
-    let td5 = document.createElement("td");
-    td5.innerText=operatorType;
-
-    let td6 = document.createElement("td");
-    td6.innerText=operatorEmail;
-    
-    tr2.append(td1,td2,td3,td4,td5,td6);
-
-    tbody.append(tr2);
-
-    table.append(tbody);
-    
-    container.append(table);
+            
+            
+            cont.append(p,br);
 });
     }
     
