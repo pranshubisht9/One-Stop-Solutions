@@ -95,6 +95,9 @@ popText.innerHTML=`<br>
 <p style="display: block;">${data.message}</p>
 
 <br>`
+
+document.getElementById("deptForm").reset();
+
 })
 
 //get all dept
@@ -193,14 +196,29 @@ e.preventDefault();
     })
 
     let data = await res.json();
-    //  console.log('data:', data)
+     console.log('data:', data)
 
-     visiblePOP();
-     popText.innerHTML=`<br>
-     <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-     <p style="display: block;">${data.message}</p>
-     
-     <br>`
+     if(data.message == "Delete Successfully"){
+         visiblePOP();
+         popText.innerHTML=`<br>
+         <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+         <p style="display: block;">${data.message}</p>
+         
+         <br>`
+
+     }else{
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
+        
+        <br>`
+
+     }
+
+     document.getElementById("deleteDepart").reset();
+
 
 })
 
@@ -225,12 +243,27 @@ document.querySelector("#updateDept").addEventListener("submit",async(e)=>{
     })
 
     let data = await res.json();
-    visiblePOP();
-    popText.innerHTML=`<br>
-    <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-    <p style="display: block;">${data.message}</p>
-    
-    <br>`
+
+    console.log(data);
+
+    if(data.message=="Updated Successfully"){
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;">${data.message}</p>
+        
+        <br>`
+    }else{
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
+        
+        <br>`
+    }
+
+document.getElementById("updateDept").reset();
+
 })
 
 
@@ -253,22 +286,38 @@ document.querySelector("#getDeptById").addEventListener("submit",async(e)=>{
     })
 
     let data = await res.json();
+    console.log(data);
 
-    visiblePOP();
-    popText.innerHTML=`<br>
-    <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-    <p style="display: block;"><h3>Department Id : </h3><i>${data.departmentId}</i></p>
-    <p style="display: block;"><h3>Department Name : </h3><i>${data.departmentName}</i></p>
-    
-    <br>`
+    if(data.departmentId == undefined){
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;"><h3>${data.message}</p>
+        
+        
+        <br>`
+
+    }else{
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3>Department Id : </h3><i>${data.departmentId}</i></p>
+        <p style="display: block;"><h3>Department Name : </h3><i>${data.departmentName}</i></p>
+        
+        <br>`
+    }
+
+
+document.getElementById("getDeptById").reset();
+
+
 })
 
 
 
 // add operator
-
-
-
 
 document.querySelector("#createOperator").addEventListener("submit",async(e)=>{
     e.preventDefault();
@@ -295,12 +344,28 @@ password : document.getElementById("password").value
 })
 
 let data = await res.json();  
-visiblePOP();
-popText.innerHTML=`<br>
-<img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-<p style="display: block;">${data.message}</p>
+console.log(data);
 
-<br>`
+if(data.message == "Operator Added Successfully"){
+
+    visiblePOP();
+    popText.innerHTML=`<br>
+    <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+    <p style="display: block;">${data.message}</p>
+    
+    <br>`
+}else{
+
+    visiblePOP();
+    popText.innerHTML=`<br>
+    <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+    <p style="display: block;">${data.message}</p>
+    
+    <br>`
+
+}
+
+document.getElementById("createOperator").reset();
 })
 
 
@@ -323,18 +388,34 @@ document.querySelector("#getOperatorById").addEventListener("submit",async(e)=>{
     let data = await res.json();
     console.log(data);
 
-    visiblePOP();
-    popText.innerHTML=`<br>
-    <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-    <p style="display: block;"><h3> ${data.login.type} </h3></p>
-    <p style="display: block;">${data.operatorFirstName} ${data.operatorLastName}</p>
-    <p style="display: block;">Email: ${data.operatorEmail}</p>
-    <p style="display: block;">Mobile Number: ${data.operatorMobile}</p>
-    <p style="display: block;">Operator Id: ${data.operatorId}</p>
-    <p style="display: block;">Operator Type:  ${data.operatorType}</p>
-    <p style="display: block;">Mobile Number: ${data.operatorMobile}</p>
-    <p style="display: block;">Username:  ${data.login.username}</p>
-    <br>`
+    if(data.operatorId==null){
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
+        
+        <br>`
+
+
+    }else{
+
+        
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3> ${data.login.type} </h3></p>
+        <p style="display: block;">${data.operatorFirstName} ${data.operatorLastName}</p>
+        <p style="display: block;">Email: ${data.operatorEmail}</p>
+        <p style="display: block;">Mobile Number: ${data.operatorMobile}</p>
+        <p style="display: block;">Operator Id: ${data.operatorId}</p>
+        <p style="display: block;">Operator Type:  ${data.operatorType}</p>
+        <p style="display: block;">Mobile Number: ${data.operatorMobile}</p>
+        <p style="display: block;">Username:  ${data.login.username}</p>
+        <br>`
+        
+        
+    }
+    document.getElementById("getOperatorById").reset();
 })
 
 

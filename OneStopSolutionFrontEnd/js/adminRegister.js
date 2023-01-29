@@ -1,4 +1,3 @@
-console.log(12);
 document.querySelector("form").addEventListener("submit", async (ev)=> {
     ev.preventDefault();
      let registerData = {
@@ -26,18 +25,11 @@ document.querySelector("form").addEventListener("submit", async (ev)=> {
      })
  
      let responseData = (data) => {
-            
         
              visiblePOP();
              popText.innerHTML=`<br>
              <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
              <p style="display: block;">${data.message}</p>
-             <button window.location.href="../subpages/adminLogin.html"> Admin Login </button>
              <br>`
 
-
-        
-
- 
- 
      }

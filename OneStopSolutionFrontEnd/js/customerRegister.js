@@ -33,7 +33,6 @@ document.querySelector("#registerCustomer").addEventListener("submit", async (ev
              popText.innerHTML=`<br>
              <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
              <p style="display: block;">${data.message}</p>
-             <button window.location.href="../subpages/customerLogin.html"> Admin Login </button>
              <br>`
 
 

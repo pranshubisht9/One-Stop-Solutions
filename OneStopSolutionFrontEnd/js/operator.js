@@ -82,7 +82,6 @@ document.querySelector("#issueByCustId").addEventListener("submit",async(e)=>{
     let cxId = document.getElementById("cxId").value;
 
 
-
     let res = await fetch(`http://localhost:8880/operator/issues/id/${cxId}`, {
         method: 'Get',
         headers: {
@@ -96,24 +95,38 @@ document.querySelector("#issueByCustId").addEventListener("submit",async(e)=>{
 })
 
     let visibleOut = (data) => {
-        visiblePOP();
+
+        if(data.length == 0){
+
+            visiblePOP();
         popText.innerHTML=`<br>
-        <h2 style="display: block;"><u> All Issues By Type: </u></h2>
-        <br>`
-    
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
+        <br>` 
+
+        }else{
+
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <h2 style="display: block;"><u> All Issues By Type: </u></h2>
+            <br>`
+            
         
         let cont = document.getElementById("popAlert");
-    
+        
         data.forEach(({issueId,issueType,issueDescription}, i) => {
-    
-    
-    let p = document.createElement("p");
-    p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
-    let br = document.createElement("br");
-   
-    cont.append(p,br);
+            
+            
+            let p = document.createElement("p");
+            p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
+            let br = document.createElement("br");
+            
+            cont.append(p,br);
+            
+        });
+    }
+document.getElementById("issueByCustId").reset();
 
-    });
     }
 
 
@@ -144,24 +157,39 @@ document.querySelector("#issueByType").addEventListener("submit",async(e)=>{
 })
 
     let visibleOutput = (data) => {
-        visiblePOP();
-        popText.innerHTML=`<br>
-        <h2 style="display: block;"><u> All Issues By Type: </u></h2>
-        <br>`
-    
-        
-        let cont = document.getElementById("popAlert");
-    
-        data.forEach(({issueId,issueType,issueDescription}, i) => {
-    
-    
-    let p = document.createElement("p");
-    p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
-    let br = document.createElement("br");
-   
-    cont.append(p,br);
 
-    });
+        if(data.length == 0){
+
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+            <p style="display: block;">${data.message}</p>
+            <br>`
+
+        }else{
+
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <h2 style="display: block;"><u> All Issues By Type: </u></h2>
+            <br>`
+            
+        
+            let cont = document.getElementById("popAlert");
+            
+            
+            data.forEach(({issueId,issueType,issueDescription}, i) => {
+                
+                
+                let p = document.createElement("p");
+                p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
+                let br = document.createElement("br");
+                
+                cont.append(p,br);
+                
+            });
+        }
+document.getElementById("issueByType").reset();
+
     }
 
 
@@ -188,7 +216,7 @@ document.querySelector("#closeIssueById").addEventListener("submit",async(e)=>{
     if(data.customerId == undefined){
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
         <p style="display: block;">${data.message}</p>
         <br>`
     }
@@ -198,11 +226,12 @@ document.querySelector("#closeIssueById").addEventListener("submit",async(e)=>{
         popText.innerHTML=`<br>
         <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
         <p style="display: block;"><h3> ${data.message} </h3></p>
-
-
         <br>`
         
     }
+
+document.getElementById("closeIssueById").reset();
+
 })
 
 
@@ -254,14 +283,13 @@ document.querySelector("#getCustomerById").addEventListener("submit",async(e)=>{
 
     let data = await res.json();
 
-    console.log(data);
+    // console.log(data);
 
     if(data.customerId == undefined){
-        // alert("wrong credential...")
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
-        <p style="display: block;">Wrong Password</p>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
         <br>`
     }
     else{
@@ -281,6 +309,9 @@ document.querySelector("#getCustomerById").addEventListener("submit",async(e)=>{
         <br>`
         
     }
+
+document.getElementById("getCustomerById").reset();
+
 })
 
 // ////////////////////////Get Customer By Firstname
@@ -308,11 +339,10 @@ document.querySelector("#getCustomerByFirstname").addEventListener("submit",asyn
 
 function fres(arrRes){
     if(arrRes.length == 0){
-        // alert("wrong credential...")
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
-        <p style="display: block;">Wrong Password</p>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
         <br>`
     }
     else{
@@ -339,6 +369,8 @@ function fres(arrRes){
             
         })
 }
+document.getElementById("getCustomerByFirstname").reset();
+
 }
 
 
@@ -363,11 +395,10 @@ document.querySelector("#getCustomerByEmail").addEventListener("submit",async(e)
     console.log(data);
 
     if(data.customerId == undefined){
-        // alert("wrong credential...")
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
-        <p style="display: block;">Wrong Password</p>
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+        <p style="display: block;">${data.message}</p>
         <br>`
     }
     else{
@@ -387,6 +418,9 @@ document.querySelector("#getCustomerByEmail").addEventListener("submit",async(e)
         <br>`
         
     }
+
+document.getElementById("getCustomerByEmail").reset();
+
 })
 
 
@@ -413,7 +447,7 @@ document.querySelector("#lockCx").addEventListener("submit",async(e)=>{
     if(data.customerId == undefined){
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
         <p style="display: block;">${data.message}</p>
         <br>`
     }
@@ -428,6 +462,9 @@ document.querySelector("#lockCx").addEventListener("submit",async(e)=>{
         <br>`
         
     }
+
+document.getElementById("lockCx").reset();
+
 })
 
 
@@ -458,12 +495,28 @@ console.log(issueObj);
 })
 
 let data = await res.json();  
-visiblePOP();
-popText.innerHTML=`<br>
-<img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
-<p style="display: block;">${data.message}</p>
+// console.log(data);
 
-<br>`
+if(data.message.includes("No Issue")){
+    visiblePOP();
+    popText.innerHTML=`<br>
+    <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+    <p style="display: block;">${data.message}</p>
+    
+    <br>`
+
+}else{
+
+    visiblePOP();
+    popText.innerHTML=`<br>
+    <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+    <p style="display: block;">${data.message}</p>
+    
+    <br>`
+}
+
+document.getElementById("createSolution").reset();
+
 })
 
 
@@ -496,11 +549,10 @@ document.querySelector("#getSolutionByIssueId").addEventListener("submit",async(
 
     function freSol(arrRes){
         if(arrRes.length == 0){
-            // alert("wrong credential...")
             visiblePOP();
             popText.innerHTML=`<br>
-            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
-            <p style="display: block;">Wrong Password</p>
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+            <p style="display: block;">${data.message}</p>
             <br>`
         }
         else{
@@ -527,6 +579,9 @@ document.querySelector("#getSolutionByIssueId").addEventListener("submit",async(
                 
             })
     }
+
+document.getElementById("getSolutionByIssueId").reset();
+
     }
 
 
@@ -550,15 +605,29 @@ document.querySelector("#deleteSolnById").addEventListener("submit",async(e)=>{
         })
     
         let data = await res.json();
-        //  console.log('data:', data)
-    
-         visiblePOP();
-         popText.innerHTML=`<br>
-         <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+         console.log('data:', data)
+
+        if(data.message.includes("Solution doesn't exist")){
+
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+            <p style="display: block;">${data.message}</p>
+            
+            <br>`
+
+        }else{
+            
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
          <p style="display: block;">${data.message}</p>
          
          <br>`
-    
+        }
+
+
+document.getElementById("deleteSolnById").reset();
     })
 
 

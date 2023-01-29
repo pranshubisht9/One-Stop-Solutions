@@ -158,11 +158,12 @@ popText.innerHTML=`<br>
         }else{
             visiblePOP();
             popText.innerHTML=`<br>
-            <h2 style="display: block;"><u> OOPs... </u></h2>
-            <br>
-            <p> ${data.message} </p>`
+            <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+            <p> ${data.message} </p>
+            <br>`
             
         }
+
 }
 
 
@@ -188,12 +189,18 @@ console.log(issueObj);
 })
 
 let data = await res.json();  
+
+
+
 visiblePOP();
 popText.innerHTML=`<br>
 <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
 <p style="display: block;">${data.message}</p>
 
 <br>`
+
+document.getElementById("createIssueById").reset();
+
 })
 
 
@@ -226,7 +233,7 @@ document.querySelector("#updatePsdById").addEventListener("submit",async(e)=>{
     if(data.issueId == undefined){
         visiblePOP();
         popText.innerHTML=`<br>
-        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
         <p style="display: block;">${data.message}</p>
         <br>`
     }
@@ -268,20 +275,28 @@ document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
 })
 
     let visibleOut = (data) => {
-        visiblePOP();
-        popText.innerHTML=`<br>
-        <h2 style="display: block;"><u>Issue</u></h2>
-        <br>`
-    
         
-        let cont = document.getElementById("popAlert");
-    
-
-    let p = document.createElement("p");
-    p.innerText = ` IssueId: ${data.issueId},  Issue Type: ${data.issueType},  Description: ${data.issueDescription}`;
-    let br = document.createElement("br");
-   
-    cont.append(p,br);
+        if(data.issueId != undefined){
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <h2 style="display: block;"><u>Issue</u></h2>
+            <br>`
+        
+            
+            let cont = document.getElementById("popAlert");
+            let p = document.createElement("p");
+            p.innerText = ` IssueId: ${data.issueId},  Issue Type: ${data.issueType},  Description: ${data.issueDescription}`;
+            let br = document.createElement("br");
+            
+            cont.append(p,br);
+        }else{
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
+            <p style="display: block;">${data.message}</p>
+            
+            <br>`    
+        }
     
     }
 
@@ -310,7 +325,7 @@ document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
         if(data.issueId == undefined){
             visiblePOP();
             popText.innerHTML=`<br>
-            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
             <p style="display: block;">${data.message}</p>
             <br>`
         }
@@ -330,8 +345,7 @@ document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
 
 
     //modify issue
-
-    // 
+    
 
     document.querySelector("#modifyByIssueId").addEventListener("submit",async(e)=>{
 
@@ -355,7 +369,7 @@ document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
         if(data.issueId == undefined){
             visiblePOP();
             popText.innerHTML=`<br>
-            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+            <img id="wrong_psd_gif" src="https://media.tenor.com/B1ySTFIj8fcAAAAi/error.gif" alt="">
             <p style="display: block;">${data.message}</p>
             <br>`
         }
@@ -371,97 +385,3 @@ document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
             
         }
     })
-
-
-
-// document.querySelector("#issueByCustId").addEventListener("submit",async(e)=>{
-
-//     e.preventDefault();
-
-//     let cxId = document.getElementById("cxId").value;
-
-
-
-//     let res = await fetch(`http://localhost:8880/operator/issues/id/${cxId}`, {
-//         method: 'Get',
-//         headers: {
-//             'Content-Type': "application/json",
-//         }
-//     })
-
-//     let data = await res.json();
-
-//    visibleOut(data);
-// })
-
-//     let visibleOut = (data) => {
-//         visiblePOP();
-//         popText.innerHTML=`<br>
-//         <h2 style="display: block;"><u> All Issues By Type: </u></h2>
-//         <br>`
-    
-        
-//         let cont = document.getElementById("popAlert");
-    
-//         data.forEach(({issueId,issueType,issueDescription}, i) => {
-    
-    
-//     let p = document.createElement("p");
-//     p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
-//     let br = document.createElement("br");
-   
-//     cont.append(p,br);
-
-//     });
-//     }
-
-////////////////////////////////////////////
-// modify issu
-
-////////////////////////////////////////////
-// reopen issue
-
-
-
-
-
-
-//////////////////////////////////////////////////////////
-// function openTable(id){
-//     document.querySelector("#"+id+">table").classList.remove("hide");
-//     window.location.href="#"+id;
-// }
-
-// // opeanig form
-// function openCustForm(id){
-//     document.querySelector("#"+id+">form").classList.remove("hide");
-//     window.location.href="#"+id;
-// }
-
-
-
-
-
-
-
-// // fetching customer profile
-// function getCustomerProfile(){
-
-
-
-// }
-
-// // View Customer Issue
-// function viewCustomerIssue(){
-
-// }
-
-// // Cerate Customer Issue
-// function createCustomerIssue(){
-
-// }
-
-// // Update Customer Password
-// function updateCustomerIssue(){
-
-// }
