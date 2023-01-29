@@ -39,6 +39,14 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Output> deleteCustomerHandler(@PathVariable("id") Integer id) {
+
+		Output output = customerService.deleteCustomer(id);
+
+		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
+	}
+
 
 	// Customer Login
 	@PostMapping("/login")
@@ -60,7 +68,7 @@ public class CustomerController {
 
 
 	// Get All Issue
-	@GetMapping("/issue/all/{customerId}")
+	@GetMapping("/issues/{customerId}")
 	public ResponseEntity<List<Issue>> getAllIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId) {
 		List<Issue> issues = customerService.getAllIssuesByCustomerId(customerId);
 
@@ -96,7 +104,7 @@ public class CustomerController {
 
 
 	// Update Customer's Password
-	@PutMapping("/customers/changepassword/{customerId}")
+	@PutMapping("/customers/{customerId}")
 	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId,
 			@RequestBody CustomerUpdatePasswordDto dto) {
 		Output output = customerService.updatePassword(dto, customerId);
@@ -104,4 +112,12 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
 
+	// update issue by id
+	@PutMapping("/issues/{issueId}/{updateDesc}")
+	public ResponseEntity<Output> updateIssueHandle(@PathVariable("issueId") Integer issueId, @PathVariable("updateDesc") String desc
+														) {
+		Output output = customerService.updateIssueByIssueId(issueId,desc);
+
+		return new ResponseEntity<Output>(output, HttpStatus.OK);
+	}
 }

@@ -182,3 +182,7 @@ footer>div>div{
     position: fixed;
     width: 100px;
 }
+
+.changeColorLogout-delete{
+    color: goldenrod;
+}

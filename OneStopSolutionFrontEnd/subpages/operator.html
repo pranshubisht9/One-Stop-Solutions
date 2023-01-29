@@ -36,7 +36,7 @@
                 <img src="../resources/OneStopSolution.png" id="logo_fix" alt="logo">
             </div>
             <div id="options">
-                <li onclick="logOutOper()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+                <li onclick="logOutOper()" class="changeColorLogout-delete"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
             </div>
         </div>
     </nav>
@@ -114,11 +114,11 @@
         </div>
 
         <div id="lockCustomer">
-            <span onclick="openOpeForm('lockCustomer')">lock Customer</span>
-            <form class="operFormCss hide">
+            <span>lock Customer</span>
+            <form class="operFormCss hide" id="lockCx">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Customer" onclick="openTable('lockCustomer')">
+                <input type="number" name="customerId" placeholder="Enter Customer Id" id="customerLockId">
+                <input type="submit" value="Get Customer">
             </form>
         </div>
 

@@ -110,7 +110,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Output createIssue(CreateIssueDto dto, Integer customerId) throws IssueException {
-		
+
 		// Extracting Customer using Customer ID
 		Optional<Customer> optional = customerRepository.findById(customerId);
 
@@ -257,4 +257,54 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
+	@Override
+	public Output updateIssueByIssueId(Integer issueId, String desc) throws CustomerException {
+		Output output = new Output();
+
+		// Extracting customer using customerId
+		Optional<Issue> optional = issueRepository.findById(issueId);
+
+		// Checking if Issue is present or not
+		if (optional.isEmpty()) {
+			throw new CustomerException("No Issues Found");
+		}
+
+		Issue issue = optional.get();
+
+		if (desc != null) {
+
+			//setting description
+			issue.setIssueDescription(desc);
+
+			// Updating Customer's A/c
+			issueRepository.save(issue);
+
+			output.setMessage("Issue Updated Successfully");
+
+		}else{
+			output.setMessage("Description is null");
+		}
+		return output;
+	}
+
+	@Override
+	public Output deleteCustomer(Integer customerId) throws CustomerException {
+		Output output = new Output();
+
+		Optional<Customer> opt= customerRepository.findById(customerId);
+
+		if(opt.isPresent()) {
+
+			Customer customer= opt.get();
+
+			customerRepository.delete(customer);
+
+			output.setMessage("Delete Successfully");
+
+			return output;
+
+		}
+		else
+			throw new CustomerException("Customer does not exist with customer Id :"+customerId);
+	}
 }

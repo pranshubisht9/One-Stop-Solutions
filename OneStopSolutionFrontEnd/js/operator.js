@@ -8,7 +8,7 @@ function logOutOper(){
         alert("Loging You Out");
         localStorage.removeItem("operator")
 
-        window.location.href="index.html";
+        window.location.href="../index.html";
     }
 }
 
@@ -175,10 +175,10 @@ document.querySelector("#closeIssueById").addEventListener("submit",async(e)=>{
 
     e.preventDefault();
 
-    let closeId = document.getElementById("cId").value;
+    let closeId = document.getElementById("closeId").value;
 
     let res = await fetch(`http://localhost:8880/operator/issues/${closeId}`, {
-        method: 'Get',
+        method: 'PATCH',
         headers: {
             'Content-Type': "application/json",
         }
@@ -189,7 +189,6 @@ document.querySelector("#closeIssueById").addEventListener("submit",async(e)=>{
     console.log(data);
 
     if(data.customerId == undefined){
-        // alert("wrong credential...")
         visiblePOP();
         popText.innerHTML=`<br>
         <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
@@ -395,6 +394,45 @@ document.querySelector("#getCustomerByEmail").addEventListener("submit",async(e)
 
 
 // //////////////////////lock Customer
+// 
+document.querySelector("#lockCx").addEventListener("submit",async(e)=>{
+
+    e.preventDefault();
+
+    let customerId = document.getElementById("customerLockId").value;
+
+    let res = await fetch(`http://localhost:8880/operator/customer/${customerId}
+    `, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
+
+    let data = await res.json();
+
+    console.log(data);
+
+    if(data.customerId == undefined){
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <p style="display: block;">${data.message}</p>
+        <br>`
+    }
+    else{
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3> ${data.message} </h3></p>
+
+
+        <br>`
+        
+    }
+})
+
 
 // /////////////////////////Create Solution   Issue Id , Solution Description
 

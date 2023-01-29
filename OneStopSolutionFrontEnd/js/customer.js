@@ -1,5 +1,63 @@
-// fetch data  from local storage
 let customerObj = JSON.parse(localStorage.getItem("customer"));
+// Logout customer 
+function logOutCustomer(){
+    let sure = confirm("Are You Sure Want To Log Out?");
+
+    if(sure){
+        alert("Loging You Out");
+        localStorage.removeItem("customer");
+        window.location.href="../index.html";
+    }
+}
+
+// Delete customer Account
+function deleteCustomer(){
+    let sure = confirm("Are You Sure Want To Delete Account?");
+
+
+
+    if(sure){
+        // alert("Deleting Your Account!");
+        // window.location.href="index.html"
+
+
+
+            let deleteCx = async() =>{            
+                let res = await fetch(`http://localhost:8880/customer/${customerObj.customerId}`, {
+            
+                    method: 'DELETE',
+            
+                    headers: {
+                        'Content-Type': "application/json",
+                    }
+                })
+            
+                let data = await res.json();
+                //  console.log('data:', data)
+            
+                 visiblePOP();
+                 popText.innerHTML=`<br>
+                 <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+                 <p style="display: block;">${data.message}</p>
+                 
+                 <br>`
+
+    }
+
+    setTimeout(() => {
+        
+        localStorage.removeItem("customer");
+        window.location.href="../index.html";
+        deleteCx();
+    }, 4000);
+
+}
+
+}
+
+// fetch data  from local storage
+
+console.log(customerObj);
 
 
 let tr1 = document.createElement("tr");
@@ -67,79 +125,304 @@ document.getElementById("profile").style.color="white";
 let viewCustomerIssue = () => {
 
 
-    let url = "http://localhost:8880/admin/departments";
+    let url = `http://localhost:8880/customer/issues/${customerObj.customerId}`;
     fetch(url).then((res)=>{
         return (res.json());
     }).then((data)=>{
-        // console.log(data);
+        console.log(data);
         getAllDeptResponse(data)
     }).catch(function(err){
         console.log(err)
     })
+
+}
     
     let getAllDeptResponse = (data) => {
+        
+        let cont = document.getElementById("popAlert");
+
+        if(data.length != 0){
+
+            visiblePOP();
+popText.innerHTML=`<br>
+<h2 style="display: block;"><u> All Issues: </u></h2>
+<br>`
+            data.forEach(({issueId,issueType,issueDescription}, i) => {
+                
+                let p = document.createElement("p");
+                p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
+                let br = document.createElement("br");
+                
+                cont.append(p,br);
+                
+            });
+            
+            
+        }else{
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <h2 style="display: block;"><u> OOPs... </u></h2>
+            <br>
+            <p> ${data.message} </p>`
+            
+        }
+}
+
+
+// ////////////////////////////////////////////
+// // create issues
+
+document.querySelector("#createIssueById").addEventListener("submit",async(e)=>{
+    e.preventDefault();
+
+
+   let issueObj = {
+       issueType: document.getElementById("issueType").value,
+    issueDescription : document.getElementById("issueDesc").value
+}
+console.log(issueObj);
+
+   let res = await fetch(`http://localhost:8880/customer/issue/${customerObj.customerId}`, {
+    method: 'POST',
+    body: JSON.stringify(issueObj),
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+let data = await res.json();  
+visiblePOP();
+popText.innerHTML=`<br>
+<img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+<p style="display: block;">${data.message}</p>
+
+<br>`
+})
+
+
+
+// ////////////////////////////////////////////
+// // update password
+
+document.querySelector("#updatePsdById").addEventListener("submit",async(e)=>{
+
+    e.preventDefault();
+
+    let passwordDetails = {
+        oldPassword: document.getElementById("oldPsd").value,
+        newPassword: document.getElementById("newPsd").value
+    }
+
+    let res = await fetch(`http://localhost:8880/customer/customers/${customerObj.customerId}
+    `, {
+        method: 'PUT',
+        body: JSON.stringify(passwordDetails),
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
+
+    let data = await res.json();
+
+    console.log(data);
+
+    if(data.issueId == undefined){
         visiblePOP();
         popText.innerHTML=`<br>
-        <h2 style="display: block;"><u> All Departments </u></h2>
+        <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+        <p style="display: block;">${data.message}</p>
+        <br>`
+    }
+    else{
+
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+        <p style="display: block;"><h3> ${data.message} </h3></p>
+
+
+        <br>`
+        
+    }
+})
+
+
+// ////////////////////////////////////////////
+// // get issue by id
+
+document.querySelector("#getIssueById").addEventListener("submit",async(e)=>{
+
+    e.preventDefault();
+
+    let issueId = document.getElementById("getByIssueId").value;
+
+
+
+    let res = await fetch(`http://localhost:8880/customer/issue/one/${issueId}`, {
+        method: 'Get',
+        headers: {
+            'Content-Type': "application/json",
+        }
+    })
+
+    let data = await res.json();
+
+   visibleOut(data);
+})
+
+    let visibleOut = (data) => {
+        visiblePOP();
+        popText.innerHTML=`<br>
+        <h2 style="display: block;"><u>Issue</u></h2>
         <br>`
     
         
         let cont = document.getElementById("popAlert");
     
+
+    let p = document.createElement("p");
+    p.innerText = ` IssueId: ${data.issueId},  Issue Type: ${data.issueType},  Description: ${data.issueDescription}`;
+    let br = document.createElement("br");
+   
+    cont.append(p,br);
     
-        let table = document.createElement("table");
-    
-    
-        let thead = document.createElement("thead");
-    
-        
-        let tr1 = document.createElement("tr");
-        tr1.setAttribute("class","col")
-        tr1.setAttribute("id", "thead-d")
-        
-        let th1 = document.createElement('th')
-        th1.innerText = "Department Id ";
-        
-        let th2 = document.createElement('th')
-        th2.innerText = "Department Name";
-        
-        tr1.append(th1,th2);
-    
-    
-        thead.append(tr1);
-    
-        table.append(thead);
-        
-        let tbody = document.createElement("tbody");
-    
-        tbody.innerHTML="";
-    
-        data.forEach(({departmentId,departmentName}, i) => {
-    
-    
-    let row = document.createElement("tr");
-    row.setAttribute("class","col")
-    
-    let col1 = document.createElement("td");
-    col1.innerText = departmentId;
-    let col2 = document.createElement("td");
-    col2.innerText=departmentName;
-    
-    row.append(col1,col2);
-    
-    tbody.append(row);
-    table.append(tbody);
-    cont.append(table)
-    });
     }
-}
+
+    //////////////////////////// reopen issue
+
+    // 
+
+    document.querySelector("#reOpenIssueById").addEventListener("submit",async(e)=>{
+
+        e.preventDefault();
+    
+        let issueId = document.getElementById("reopenIssueId").value;
+    
+        let res = await fetch(`http://localhost:8880/customer/issue/${issueId}
+        `, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': "application/json",
+            }
+        })
+    
+        let data = await res.json();
+    
+        console.log(data);
+    
+        if(data.issueId == undefined){
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+            <p style="display: block;">${data.message}</p>
+            <br>`
+        }
+        else{
+    
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+            <p style="display: block;"><h3> ${data.message} </h3></p>
     
     
+            <br>`
+            
+        }
+    })
+
+
+
+    //modify issue
+
+    // 
+
+    document.querySelector("#modifyByIssueId").addEventListener("submit",async(e)=>{
+
+        e.preventDefault();
+
+        let issueId = document.getElementById("issueIdForModify").value;
+        let updateDesc = document.getElementById("modifyDesc").value;
     
+        let res = await fetch(`http://localhost:8880/customer/issues/${issueId}/${updateDesc}
+        `, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': "application/json",
+            }
+        })
+    
+        let data = await res.json();
+    
+        console.log(data);
+    
+        if(data.issueId == undefined){
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://media4.giphy.com/media/uVFGDyOshK7I6geXyg/giphy.gif?cid=790b7611fd6fb1eeba3f3e60cc9a6794c636693dc8e6be3c&rid=giphy.gif&ct=g" alt="">
+            <p style="display: block;">${data.message}</p>
+            <br>`
+        }
+        else{
+    
+            visiblePOP();
+            popText.innerHTML=`<br>
+            <img id="wrong_psd_gif" src="https://i.gifer.com/7efs.gif" alt="">
+            <p style="display: block;"><h3> ${data.message} </h3></p>
+    
+    
+            <br>`
+            
+        }
+    })
 
 
 
+// document.querySelector("#issueByCustId").addEventListener("submit",async(e)=>{
 
+//     e.preventDefault();
+
+//     let cxId = document.getElementById("cxId").value;
+
+
+
+//     let res = await fetch(`http://localhost:8880/operator/issues/id/${cxId}`, {
+//         method: 'Get',
+//         headers: {
+//             'Content-Type': "application/json",
+//         }
+//     })
+
+//     let data = await res.json();
+
+//    visibleOut(data);
+// })
+
+//     let visibleOut = (data) => {
+//         visiblePOP();
+//         popText.innerHTML=`<br>
+//         <h2 style="display: block;"><u> All Issues By Type: </u></h2>
+//         <br>`
+    
+        
+//         let cont = document.getElementById("popAlert");
+    
+//         data.forEach(({issueId,issueType,issueDescription}, i) => {
+    
+    
+//     let p = document.createElement("p");
+//     p.innerText = ` No: ${i},  IssueId: ${issueId},  Issue Type: ${issueType},  Description: ${issueDescription}`;
+//     let br = document.createElement("br");
+   
+//     cont.append(p,br);
+
+//     });
+//     }
+
+////////////////////////////////////////////
+// modify issu
+
+////////////////////////////////////////////
+// reopen issue
 
 
 
@@ -147,59 +430,41 @@ let viewCustomerIssue = () => {
 
 
 //////////////////////////////////////////////////////////
-function openTable(id){
-    document.querySelector("#"+id+">table").classList.remove("hide");
-    window.location.href="#"+id;
-}
+// function openTable(id){
+//     document.querySelector("#"+id+">table").classList.remove("hide");
+//     window.location.href="#"+id;
+// }
 
-// opeanig form
-function openCustForm(id){
-    document.querySelector("#"+id+">form").classList.remove("hide");
-    window.location.href="#"+id;
-}
-
-
-// Logout customer 
-function logOutCustomer(){
-    let sure = confirm("Are You Sure Want To Log Out?");
-
-    if(sure){
-        alert("Loging You Out");
-        window.location.href="index.html";
-    }
-}
-
-// Delete customer Account
-function deleteCustomer(){
-    let sure = confirm("Are You Sure Want To Delete Account?");
-
-    if(sure){
-        alert("Deleting Your Account!");
-        window.location.href="index.html"
-    }
-}
+// // opeanig form
+// function openCustForm(id){
+//     document.querySelector("#"+id+">form").classList.remove("hide");
+//     window.location.href="#"+id;
+// }
 
 
 
 
-// fetching customer profile
-function getCustomerProfile(){
 
 
 
-}
+// // fetching customer profile
+// function getCustomerProfile(){
 
-// View Customer Issue
-function viewCustomerIssue(){
 
-}
 
-// Cerate Customer Issue
-function createCustomerIssue(){
+// }
 
-}
+// // View Customer Issue
+// function viewCustomerIssue(){
 
-// Update Customer Password
-function updateCustomerIssue(){
+// }
 
-}
+// // Cerate Customer Issue
+// function createCustomerIssue(){
+
+// }
+
+// // Update Customer Password
+// function updateCustomerIssue(){
+
+// }

@@ -31,4 +31,8 @@ public interface CustomerService {
 
 	public Output updatePassword(CustomerUpdatePasswordDto dto, Integer customerId) throws CustomerException;
 
+	public Output updateIssueByIssueId(Integer issueId, String desc) throws CustomerException;
+
+	public Output deleteCustomer(Integer CustomerId) throws CustomerException;
+
 }

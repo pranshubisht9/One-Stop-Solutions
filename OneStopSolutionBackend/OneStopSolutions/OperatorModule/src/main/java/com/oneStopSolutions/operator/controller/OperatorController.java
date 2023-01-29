@@ -61,7 +61,7 @@ public class OperatorController {
 	}
 	
 	//To close Issue By Id
-	@GetMapping("issues/{issueId}")
+	@PatchMapping("issues/{issueId}")
 	public ResponseEntity<Output> closeIssueByIdHandler(@PathVariable("issueId") Integer issueId){
 		Output output = operatorService.closeIssueById(issueId);
 		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
