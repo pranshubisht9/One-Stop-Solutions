@@ -55,11 +55,16 @@ The goal of the project is to streamline the process of resolving electronic iss
 ### Back End
 * Java-8
 * Spring Boot
+* Hibernate
 * Maven
-* Postman
-* Swagger
 * Validation
 * Lombok
+
+### Tools
+* Swagger
+* VS Code
+* IntelliJ
+* STS
 
 ## Contributions
 
