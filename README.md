@@ -1,6 +1,6 @@
 # One-Stop-Solutions
 
-CustomerCare: The One-Stop Solution for Electronic Issues
+Customer Care: The One-Stop Solution for Electronic Issues
 
 ![oneS](https://user-images.githubusercontent.com/106018070/215494145-d04ee39b-58cd-4af0-adc6-fa21444f4f49.png)
 
