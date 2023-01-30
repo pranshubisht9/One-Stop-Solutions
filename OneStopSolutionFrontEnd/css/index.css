@@ -14,6 +14,8 @@
 body{
     font-family: 'Poppins', sans-serif;
     background-color: rgb(235, 235, 237);
+    margin: 0;
+padding: 0;
 }
 navbar{
     width: 100vw;
@@ -186,3 +188,13 @@ footer>div>div{
 .changeColorLogout-delete{
     color: goldenrod;
 }
+
+#adminSec,#opeSec, #cusSec{
+    margin-top: 0vh !important;
+height: 94vh;
+width: 100%;
+position: fixed;
+overflow-y: scroll;
+padding-top: 15px;
+}
+
