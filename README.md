@@ -92,10 +92,23 @@ The goal of the project is to streamline the process of resolving electronic iss
 ## Operator Side
 ![Operator](https://user-images.githubusercontent.com/106018070/215519784-6dd4f37e-dfaa-43e4-90f1-04bd89560c0c.png)
 
+![customerswithname](https://user-images.githubusercontent.com/106018070/215525636-64217104-2ec6-41f4-990b-0d2b163904c5.png)
+
+
+
+![issueResolved](https://user-images.githubusercontent.com/106018070/215525683-87d3fd39-8944-4d31-8c57-af73b7c918d5.png)
+
+
+
+
 ## Customer Side
 ![customer](https://user-images.githubusercontent.com/106018070/215520056-fef14638-a4a6-45a8-a45b-8b8b28ac545f.png)
 
 ![issueadded](https://user-images.githubusercontent.com/106018070/215520127-4e6f6c5e-1a9f-4f28-bb36-6f82d23002ec.png)
+
+
+![invalid issue id](https://user-images.githubusercontent.com/106018070/215525428-a78b5b4f-1654-4193-9bfd-ffa501717119.png)
+
 
 
 ## Deployed Front End
