@@ -349,7 +349,7 @@ function fres(arrRes){
 
     visiblePOP();
     popText.innerHTML=`<br>
-    <h2 style="display: block;">${arrRes[0].login.type}</u></h2>
+    <h2 style="display: block;">${arrRes[0].login.type}S</u></h2>
     <br>`
     
     
