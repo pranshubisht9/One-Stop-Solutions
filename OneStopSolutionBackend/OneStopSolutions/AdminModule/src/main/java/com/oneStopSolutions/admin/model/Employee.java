@@ -20,7 +20,6 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 
-	// Bi-directional
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Department department;
 

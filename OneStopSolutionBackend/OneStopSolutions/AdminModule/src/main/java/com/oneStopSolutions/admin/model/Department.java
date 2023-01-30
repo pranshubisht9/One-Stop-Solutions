@@ -23,18 +23,15 @@ public class Department {
 	private Integer departmentId;
 	private String departmentName;
 
-	// Bi-direction
 	@JsonIgnore
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
 	private List<Admin> adminList = new ArrayList<>();
 
-	// Uni-directional
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
 	@JoinColumn(name = "department_id")
 	private List<Operator> operatorList = new ArrayList<>();
 
-	// Bi-directional
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Employee> employeeList = new ArrayList<>();
