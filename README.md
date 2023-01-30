@@ -58,6 +58,8 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Maven
 * Validation
 * Lombok
+* MySQL
+
 
 ### Tools
 * Swagger
