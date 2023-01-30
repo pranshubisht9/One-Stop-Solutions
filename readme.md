@@ -61,7 +61,7 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Validation
 * Lombok
 
-## Team
+## Contributaions
 
 * Pranshu Singh Bisht
 * Kapil Khursade
