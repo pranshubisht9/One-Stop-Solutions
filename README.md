@@ -17,11 +17,12 @@ The goal of the project is to streamline the process of resolving electronic iss
 
 ## Module Wise Functionality
 
-### Customer
-* Login/Registration
-* View Issue
-* Create/ Delete Issue
-* Reopen issue
+### Admin 
+* Login/Register
+* Create Operator
+* Create Department
+* View Department
+* View Employee
 
 ### Operator
 * Login
@@ -30,13 +31,11 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Create Solution
 * View Solurtion by Id, Issue Id.
 
-### Admin 
-* Login/Register
-* Create Operator
-* Create Department
-* View Department
-* View Employee
-
+### Customer
+* Login/Registration
+* View Issue
+* Create/ Delete Issue
+* Reopen issue
 
 
 ## Entity Relationship (ER) Diagram Model
