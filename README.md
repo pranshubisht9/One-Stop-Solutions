@@ -71,7 +71,6 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Kapil Khursade
 * Shubadeep Bid
 * Mukta Raj
-* Anirudh Desai
 
 # Sample View
 
