@@ -55,6 +55,7 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Java-8
 * Spring Boot
 * Hibernate
+* Data JPA
 * Maven
 * Validation
 * Lombok
